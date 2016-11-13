@@ -2,7 +2,9 @@
  * Created by nethmih on 9/11/16.
  */
 var taskId = 0;
-totalTasks = [];
+var totalTasks = [];
+var completedTasks = [];
+
 function Task(title,id,active){
     this.title = title;
     this.id = id;

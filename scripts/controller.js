@@ -6,42 +6,50 @@ function Controller(){
 
 };
 
-Controller.prototype.AddNewtodo =  () => {
-    console.log('controller addNewtodo hits');
-    let title = document.getElementById('texttodo').value.toString();
-    var task = new Task(title,++taskId,true);
-    //var tasks = new(task);
-    totalTasks.push(task);
-    localStorage.setItem('totalTasks',JSON.stringify(totalTasks));
-    DisplayTasks();
+Controller.prototype.AddNewTask = function(textId){
+    console.log('controller AddNewTask hits');
+    var newToDo = document.getElementById(textId).value;
+    if (newToDo !== '') {
+        var newTask = new Task(newToDo, taskId++, true);
+
+        try {
+            if (newTask != 'undefined') {
+                totalTasks.push(newTask);
+                console.log(totalTasks);
+            }
+
+        } catch (e) {
+            console.log('Error ' + e);
+        }
+    }else{
+        this.errorMsg('To Do Task cannot be empty');
+    }
 };
 
 
-Controller.prototype.DisplayTasks = () =>  {
-    let div = document.getElementById('viewTasks');
-    div.innerHTML = "";
-
-    for ( var i = 0; i < totalTasks.length; ++i ) {
-
-        let tick = document.createElement('input');
-        tick.type = 'checkbox';
-        tick.id = totalTasks[i].id;
-        tick.textContent = totalTasks[i].title;
-
-        div.appendChild(tick);
+Controller.prototype.removeElement = function (id) {
+    console.log('remove element hits   ' + id);
+    var index =-1;
+    for(var i=0;i<totalTasks.length;i++){
+        //console.log(totalTasks[i].id + "[[[[[[[[");
+        if(totalTasks[i].id == id){
+           // console.log('////////////' + totalTasks[i].id);
+            index = i;
+            break;
+        }
+    }
+    console.log('controller hits ' + index);
+    if(index != -1){
+        totalTasks[index].active = false;
+        return true;
+    }else{
+        this.errorMsg('Index does not exist');
+        return false;
     }
 
-    return div;
 };
 
-Controller.prototype.SelectAll = () => {
-    console.log('select all hits');
-};
+Controller.prototype.errorMsg = function (msg) {
+    alert(msg);
+}
 
-Controller.prototype.SelectActive = () => {
-    console.log('select active hits');
-};
-
-Controller.prototype.SelectCompleted = () => {
-    console.log('select completed hits');
-};

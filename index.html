@@ -6,23 +6,26 @@
 </head>
 <body>
 To do tasks
+<ul id="viewToDo"></ul>
 
 <div id="viewTasks"></div>
+
+
 <input type="text" id="texttodo">
-<button id="addtodo" onclick="AddNewtodo()">Add new to do</button>
+<button id="addtodo" >Add new to do</button>
 <ul class="filters">
     <li>
-        <a href="#/" class="selected" onclick="SelectAll();return false;">All</a>
+        <a href="#/all" id="all">All</a>
     </li>
     <li>
-        <a href="#/active" onclick="SelectActive();return false;">Active</a>
+        <a href="#/active" id="active">Active</a>
     </li>
     <li>
-        <a href="#/completed" onclick="SelectCompleted();return false;">Completed</a>
+        <a href="#/completed" id="completed">Completed</a>
     </li>
 </ul>
 <script src="scripts/controller.js"></script>
 <script src="scripts/model.js"></script>
-<script src="scripts/view.js"></script>
+<script type="text/javascript" src="scripts/view.js"></script>
 </body>
 </html>

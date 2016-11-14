@@ -52,11 +52,6 @@ View.prototype.render = function () {
 
 
 document.getElementById('all').addEventListener('click',function (e) {
-    // getAll();
-    // this.render();
-    //disabling the 'all' href for the moment
-   // var anchor = document.getElementById('all');
-   // anchor.href = "javascript: void(0)";
 
     //Getting the to be completed tasks
     let todoView = new View('texttodo', 'addtodo');
@@ -64,22 +59,26 @@ document.getElementById('all').addEventListener('click',function (e) {
 
     //Getting the completed tasks
     let div = document.getElementById('viewTasks');
-    let childDiv = document.createElement('div');
-    childDiv.id = 'childDiv';
-    childDiv.innerHTML = 'completed tasks';
-    let ul = document.createElement('ul');
 
-    totalTasks.forEach(function (item) {
-        if(!item.active){
-            var li = document.createElement('li');
-            li.innerHTML = item.title;
-            ul.appendChild(li);
+    let exChildDiv = document.getElementById('childDiv');
+    if(exChildDiv==null) {
+        let childDiv = document.createElement('div');
+        childDiv.id = 'childDiv';
+        childDiv.innerHTML = 'completed tasks';
+        let ul = document.createElement('ul');
 
-        }
-    });
+        totalTasks.forEach(function (item) {
+            if (!item.active) {
+                var li = document.createElement('li');
+                li.innerHTML = item.title;
+                ul.appendChild(li);
 
-    childDiv.appendChild(ul);
-    div.appendChild(childDiv);
+            }
+        });
+
+        childDiv.appendChild(ul);
+        div.appendChild(childDiv);
+    }
     console.log('all hits');
 });
 
@@ -87,6 +86,11 @@ document.getElementById('active').addEventListener('click',function (e) {
     //getActive();
     console.log('active hits');
     //this.render();
+    let childDiv = document.getElementById('childDiv');
+    //console.log(typeof childDiv + '=============');
+    if(childDiv !== null){
+        childDiv.innerHTML = '';
+    }
     let todoView = new View('texttodo', 'addtodo');
     todoView.render();
 });

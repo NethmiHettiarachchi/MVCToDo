@@ -3,7 +3,6 @@
  */
 var taskId = 0;
 var totalTasks = [];
-var completedTasks = [];
 
 function Task(title,id,active){
     this.title = title;

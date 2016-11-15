@@ -15,7 +15,11 @@ Controller.prototype.AddNewTask = function(textId){
         try {
             if (newTask != 'undefined') {
                 totalTasks.push(newTask);
-                console.log(totalTasks);
+                localStorage.setItem('totalTasks',JSON.stringify(totalTasks));
+               // console.log(totalTasks);
+                var tTasks = localStorage.getItem('totalTasks');
+                tTasks = JSON.parse(tTasks);
+                console.log('localStorage ' + tTasks[0].title);
             }
 
         } catch (e) {
